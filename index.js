@@ -1,8 +1,7 @@
-const scanner = require("react-scanner");
+import config from "./react-scanner.config.js";
+import scanner from "react-scanner";
 
 const runScanner = async () => {
-    const config = require("./react-scanner.config.js");
-
     try {
         const output = await scanner.run(config);
         const components = output[0];
@@ -14,3 +13,5 @@ const runScanner = async () => {
         console.error("Error running react-scanner:", error);
     }
 };
+
+runScanner();

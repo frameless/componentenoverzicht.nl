@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Development project on behalf of Frameless and Grafisch Lyceum Utrecht [Conceptual product of the NL Design System project].",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -23,6 +24,10 @@
   },
   "homepage": "https://github.com/frameless/hebik.nldesignsystem.nl#readme",
   "devDependencies": {
-    "react-scanner": "github:ryanvvalkenhoef/react-scanner"
+    "react-scanner": "github:ryanvvalkenhoef/react-scanner#main",
+    "uuidv4": "^6.2.13"
+  },
+  "dependencies": {
+    "@types/node": "^20.11.28"
   }
 }

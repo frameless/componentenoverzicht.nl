@@ -17,17 +17,25 @@ async function run({
   config,
   configDir,
   crawlFrom,
+  onlyPageFiles,
   startTime,
   method = "cli",
 }) {
   const rootDir = config.rootDir || configDir;
   const globs = config.globs || DEFAULT_GLOBS;
-  const files = new fdir()
-    .glob(...globs)
-    .exclude(getExcludeFn(config.exclude))
-    .withFullPaths()
-    .crawl(crawlFrom)
-    .sync();
+  let files = [];
+
+  // Use crawlFrom as directory for crawling files
+  if (onlyPageFiles) {
+    files = crawlForPageFiles(crawlFrom);
+  } else {
+    files = new fdir()
+      .glob(...globs)
+      .exclude(getExcludeFn(config.exclude))
+      .withFullPaths()
+      .crawl(crawlFrom)
+      .sync();
+  }
 
   if (files.length === 0) {
     console.error(`No files found to scan.`);
@@ -122,6 +130,23 @@ async function run({
   }
 
   return prevResults[prevResults.length - 1];
+}
+
+function crawlForPageFiles(directory) {
+  const files = [];
+
+  fs.readdirSync(directory).forEach((file) => {
+    const filePath = path.join(directory, file);
+    const stats = fs.statSync(filePath);
+
+    if (stats.isDirectory()) {
+      files.push(...crawlForPageFiles(filePath));
+    } else if (file.endsWith(".tsx") && file === "page.tsx") {
+      files.push(filePath);
+    }
+  });
+
+  return files;
 }
 
 module.exports = run;

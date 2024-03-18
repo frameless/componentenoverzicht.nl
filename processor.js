@@ -1,11 +1,11 @@
-const fs = require("fs");
+import * as fs from 'node:fs';
 import { v4 as uuidv4 } from 'uuid';
 
-function processResults(results) {
+export const processor = function processResults(results) {
     let output = {};
     let nldsUsed = false;
 
-    results.forEach((result) => {
+    for (const result in results['report']) {
         fs.readdir("../temp/app/../../node_modules", (err, folders) => {
             for (const folder in folders) {
                 if (result.imported.includes(folder)) fs.readdir(path.join("../temp/app/../../node_modules", folder), (err, subFolders) => {
@@ -14,7 +14,10 @@ function processResults(results) {
                             // Check if nl-design-system keyword is called in package.json
                             // of the module the component is imported from.
                             fs.readFile(`../temp/app/../../${folder}/${subFolder}/package.json`, "utf8", (err, data) => {
-                                if (err) console.error("Fout bij laden van JSON:", err); return;
+                                if (err) {
+                                    console.error("Fout bij laden van JSON:", err);
+                                    return;
+                                }
                                 if (Object.values(JSON.parse(data)).includes("nl-design-system")) {
                                     nldsUsed = true;
                                 }
@@ -26,6 +29,8 @@ function processResults(results) {
         })
         // Accumulate output
         const componentName = result.local;
+        console.log(results['report'][result]['instances'][0].props);
+        // console.log(Object.entries(results)[0][1]['Textarea'].instances[0].props);
         const propEntries = Object.entries(result.props);
 
         output[componentName] = output[componentName] || {
@@ -49,9 +54,7 @@ function processResults(results) {
         output[componentName].instancesCount++;
         output[componentName].instances.push(instanceData);
         nldsUsed = false;
-    });
+    };
 
     return [output, (JSON.stringify(output) === '{}') ? nldsUsed : null];
 }
-
-module.exports = { processResults };
