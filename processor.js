@@ -1,60 +1,62 @@
 import * as fs from 'node:fs';
+import findPackageJsonFiles from './utils.js';
 import { v4 as uuidv4 } from 'uuid';
 
 export const processor = function processResults(results) {
     let output = {};
+    let libraryVersions = {};
     let nldsUsed = false;
 
     for (const result in results['report']) {
-        fs.readdir("../temp/app/../../node_modules", (err, folders) => {
-            for (const folder in folders) {
-                if (result.imported.includes(folder)) fs.readdir(path.join("../temp/app/../../node_modules", folder), (err, subFolders) => {
-                    for (const subFolder in subFolders) {
-                        if (result.imported.includes(subFolder)) {
-                            // Check if nl-design-system keyword is called in package.json
-                            // of the module the component is imported from.
-                            fs.readFile(`../temp/app/../../${folder}/${subFolder}/package.json`, "utf8", (err, data) => {
-                                if (err) {
-                                    console.error("Fout bij laden van JSON:", err);
-                                    return;
-                                }
-                                if (Object.values(JSON.parse(data)).includes("nl-design-system")) {
-                                    nldsUsed = true;
-                                }
-                            })
-                        }
-                    }
-                })
+        fs.readFile(`./nlds-dataset.json`, "utf8", (err, data) => {
+            if (err) {
+                console.error("Fout bij laden van JSON:", err);
+                return;
             }
-        })
-        // Accumulate output
-        const componentName = result.local;
-        console.log(results['report'][result]['instances'][0].props);
-        // console.log(Object.entries(results)[0][1]['Textarea'].instances[0].props);
-        const propEntries = Object.entries(result.props);
+            Object.values(JSON.parse(data)['package-names']).filter((value) => {
+                // Validate if the values of the dataset contain the source-library of the component
+                if (value.indexOf(results['report'][result].imported) > -1) nldsUsed = true;
+            })
+        });
+        // Catch NLDS libraries and versions from all package.json files
+        for (const file in findPackageJsonFiles('./temp')) {
+            fs.readFile(findPackageJsonFiles('./temp')[file], "utf8", (err, data) => {
+                if (err) {
+                    console.error("Fout bij laden van JSON:", err);
+                    return;
+                }
+                const library = results['report'][result].imported;
+                libraryVersions[library] = JSON.parse(data)['devDependencies'][library]
+            })
+        }
 
-        output[componentName] = output[componentName] || {
+        // Accumulate output
+        const component = results['report'][result];
+        output[result] = output[result] || {
             instancesCount: 0,
             id: uuidv4(),
             instances: [],
             nldsUsed: nldsUsed,
-            isWebComponent: (result.type === "JSXOpeningElement" && result.imported.includes("web-component")),
-            isCSSComponent: (result.type === "JSXOpeningElement" && result.imported.includes("component-library-css")
-                || result.imported.includes("css-component"))
+            // isWebComponent: (component.type === "JSXOpeningElement" && component.imported.includes("web-component")),
+            // isCSSComponent: (component.type === "JSXOpeningElement" && component.imported.includes("component-library-css")
+            // || component.imported.includes("css-component"))
         };
 
-        const instanceId = uuidv4();
-        const instanceData = {
-            id: instanceId,
-            path: result.location.file,
-            projectName: "hebik.nldesignsystem.nl",
-            type: result.type,
-            props: Object.fromEntries(propEntries),
+        for (const i in component.instances) {
+            const propEntries = Object.entries(component.instances[i].props);
+            const instanceId = uuidv4();
+            const instanceData = {
+                id: instanceId,
+                path: component.instances[i].location.file,
+                projectName: "hebik.nldesignsystem.nl",
+                // type: result.type,
+                props: Object.fromEntries(propEntries),
+            }
+            output[result].instancesCount++;
+            output[result].instances.push(instanceData);
+            nldsUsed = false;
         }
-        output[componentName].instancesCount++;
-        output[componentName].instances.push(instanceData);
-        nldsUsed = false;
     };
 
-    return [output, (JSON.stringify(output) === '{}') ? nldsUsed : null];
+    return [output, libraryVersions, (JSON.stringify(output) === '{}') ? nldsUsed : null];
 }

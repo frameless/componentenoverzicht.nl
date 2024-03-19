@@ -4,11 +4,8 @@ import scanner from "react-scanner";
 const runScanner = async () => {
     try {
         const output = await scanner.run(config);
-        const components = output[0];
-        const nlDesignSystemUsed = output[1];
-
-        console.log(components);
-        console.log(nlDesignSystemUsed);
+        // console.log(output[0]);
+        // console.log(output[1]);
     } catch (error) {
         console.error("Error running react-scanner:", error);
     }
