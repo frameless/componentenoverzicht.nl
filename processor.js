@@ -8,6 +8,9 @@ export const processor = function processResults(results) {
     let nldsUsed = false;
 
     for (const result in results['report']) {
+        const component = results['report'][result];
+        const importedLibrary = component.instances[0].importInfo.moduleName;
+
         fs.readFile(`./nlds-dataset.json`, "utf8", (err, data) => {
             if (err) {
                 console.error("Fout bij laden van JSON:", err);
@@ -15,7 +18,7 @@ export const processor = function processResults(results) {
             }
             Object.values(JSON.parse(data)['package-names']).filter((value) => {
                 // Validate if the values of the dataset contain the source-library of the component
-                if (value.indexOf(results['report'][result].imported) > -1) nldsUsed = true;
+                // if (value.indexOf(importedLibrary) > -1) nldsUsed = true;
             })
         });
         // Catch NLDS libraries and versions from all package.json files
@@ -25,21 +28,20 @@ export const processor = function processResults(results) {
                     console.error("Fout bij laden van JSON:", err);
                     return;
                 }
-                const library = results['report'][result].imported;
+                const library = importedLibrary.split('/')[0]
                 libraryVersions[library] = JSON.parse(data)['devDependencies'][library]
             })
         }
 
         // Accumulate output
-        const component = results['report'][result];
         output[result] = output[result] || {
             instancesCount: 0,
             id: uuidv4(),
             instances: [],
             nldsUsed: nldsUsed,
-            // isWebComponent: (component.type === "JSXOpeningElement" && component.imported.includes("web-component")),
-            // isCSSComponent: (component.type === "JSXOpeningElement" && component.imported.includes("component-library-css")
-            // || component.imported.includes("css-component"))
+            isWebComponent: (component.componentType === "JSXOpeningElement" && importedLibrary.includes("web-component")),
+            isCSSComponent: (component.componentType === "JSXOpeningElement" && importedLibrary.includes("component-library-css")
+                || importedLibrary.includes("css-component"))
         };
 
         for (const i in component.instances) {
