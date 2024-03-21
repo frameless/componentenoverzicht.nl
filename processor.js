@@ -37,7 +37,7 @@ export const processor = function processResults(results) {
                     id: instanceId,
                     path: instance.location.file,
                     projectName: "hebik.nldesignsystem.nl",
-                    type: component.type,
+                    type: instance.componentType,
                     props: Object.fromEntries(propEntries),
                 }
             });
