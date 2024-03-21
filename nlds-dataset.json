@@ -1,9 +1,9 @@
 {
   "package-names": [
-    "utrecht",
-    "gemeente-denhaag",
-    "amsterdam",
-    "nl-rvo",
-    "rijkshuisstijl-community"
+    "@utrecht",
+    "@gemeente-denhaag",
+    "@amsterdam",
+    "@nl-rvo",
+    "@rijkshuisstijl-community"
   ]
 }

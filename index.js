@@ -4,8 +4,8 @@ import scanner from "react-scanner";
 const runScanner = async () => {
     try {
         const output = await scanner.run(config);
-        // console.log(output[0]['FormLabel']);
-        // console.log(output[1]);
+        console.log(output.output);
+        console.log(output.versions);
     } catch (error) {
         console.error("Error running react-scanner:", error);
     }
