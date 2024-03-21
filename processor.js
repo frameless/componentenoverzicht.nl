@@ -40,8 +40,6 @@ export const processor = function processResults(results) {
                     type: component.type,
                     props: Object.fromEntries(propEntries),
                 }
-                // output[componentName].instancesCount++;
-                // output[componentName].instances.push(instanceData);
             });
 
             const instancesCount = (output[componentName] ? output[componentName].instancesCount : 0) + instances.length;
@@ -54,8 +52,8 @@ export const processor = function processResults(results) {
                     id: uuidv4(),
                     instances: [...(output[componentName] ? output[componentName].instances : []), ...instances],
                     nldsUsed: nldsUsed,
-                    isWebComponent: (component.componentType === "JSXOpeningElement" && importedLibrary.includes("web-component")),
-                    isCSSComponent: (component.componentType === "JSXOpeningElement" && importedLibrary.includes("component-library-css")
+                    isWebComponent: (importedLibrary.includes("web-component")),
+                    isCSSComponent: (importedLibrary.includes("component-library-css")
                         || importedLibrary.includes("css-component"))
                 }
             };
@@ -74,13 +72,13 @@ export const processor = function processResults(results) {
                     const nodePackage = (library.split('/')[0] != "@") ? library.split('/')[0] : null;
                     if (nodePackage) {
                         Object.entries(jsonObject['devDependencies']).forEach(([key, value]) => {
-                            if (library.includes(key)) libraryVersions[library] = value;
+                            if (library == key) libraryVersions[library] = value;
                         });
                     }
                 }
             }
         } catch (e) {
-            // console.error(`Fout bij het lezen van ${files[file]}: ${e.error}`);
+            console.error(`Fout bij het lezen van ${files[file]}: ${e.error}`);
         }
     }
 
