@@ -68,7 +68,7 @@ export const processor = function processResults(results) {
             jsonObject = JSON.parse(json);
             inner: for (const componentName in output) {
                 const library = output[componentName].importedLibrary;
-                if (library.includes('web-component') || library.includes('component-library-css' || library.includes('css-component'))) {
+                if (library.includes('web-component') || library.includes('component-library-css') || library.includes('css-component') || library.includes('react')) {
                     const nodePackage = (library.split('/')[0] != "@") ? library.split('/')[0] : null;
                     if (nodePackage) {
                         Object.entries(jsonObject['devDependencies']).forEach(([key, value]) => {
