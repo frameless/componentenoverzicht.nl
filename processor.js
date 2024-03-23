@@ -52,6 +52,7 @@ export const processor = function processResults(results) {
                     id: uuidv4(),
                     instances: [...(output[componentName] ? output[componentName].instances : []), ...instances],
                     nldsUsed: nldsUsed,
+                    isSnowflake: importedLibrary.includes("@/components"),
                     isWebComponent: (importedLibrary.includes("web-component")),
                     isCSSComponent: (importedLibrary.includes("component-library-css")
                         || importedLibrary.includes("css-component"))
