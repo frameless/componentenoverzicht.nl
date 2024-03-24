@@ -1,5 +1,5 @@
 import * as fs from 'node:fs';
-import findPackageJsonFiles from './utils.js';
+import findPackageJsonFiles from './findPackageJsonFiles.js';
 import { v4 as uuidv4 } from 'uuid';
 
 export const processor = function processResults(results) {
@@ -7,10 +7,10 @@ export const processor = function processResults(results) {
 
     let json, jsonObject;
     try {
-        json = fs.readFileSync('./nlds-dataset.json', { encoding: 'utf8' });
+        json = fs.readFileSync('../data/nlds-dataset.json', { encoding: 'utf8' });
         jsonObject = JSON.parse(json);
     } catch (e) {
-        console.error(`Fout bij het lezen van ./nlds-dataset.json: ${e.error}`);
+        console.error(`Fout bij het lezen van nlds-dataset.json: ${e.error}`);
     }
 
     Object.values(results['report'])
@@ -79,7 +79,7 @@ export const processor = function processResults(results) {
                 }
             }
         } catch (e) {
-            console.error(`Fout bij het lezen van ${files[file]}: ${e.error}`);
+            console.error(`Error while reading ${files[file]}: ${e.error}`);
         }
     }
 

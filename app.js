@@ -1,4 +1,4 @@
-import config from "./react-scanner.config.js";
+import config from "./utils/react-scanner.config.js";
 import scanner from "react-scanner";
 
 const runScanner = async () => {
