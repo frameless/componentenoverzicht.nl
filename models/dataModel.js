@@ -11,3 +11,5 @@ class DataModel {
         return this.crawlData;
     }
 }
+
+export const dataModel = new DataModel();

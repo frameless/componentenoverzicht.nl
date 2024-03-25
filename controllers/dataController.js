@@ -1,13 +1,11 @@
 import DataModel from '../models/dataModel';
-import WebScraper from '..utils/webScraper';
-
-const dataModel = new DataModel();
+import WebScraper from '../utils/webScraper';
 
 class DataController {
     async fetchData() {
         try {
             const scrapedData = await WebScraper.scrape();
-            dataModel.setData(scrapedData);
+            DataModel.setData(scrapedData);
             return scrapedData;
         } catch (error) {
             console.error("An error occured while webscraping", error);
@@ -16,7 +14,7 @@ class DataController {
     }
 
     getData() {
-        return dataModel.getData();
+        return DataModel.getData();
     }
 }
 

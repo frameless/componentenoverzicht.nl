@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,7 +24,10 @@
   },
   "homepage": "https://github.com/frameless/hebik.nldesignsystem.nl#readme",
   "devDependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.19.1",
     "react-scanner": "github:ryanvvalkenhoef/react-scanner#main",
+    "serve-favicon": "^2.5.0",
     "uuidv4": "^6.2.13"
   },
   "dependencies": {
