@@ -1,17 +1,40 @@
-<script type="text/javascript"></script>
+<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    const pageSlug = window.location.pathname.split("/").pop().split(".")[0];
+    const link = document.querySelector(
+      '.nlds-nav-link[href="/' + pageSlug + '"]'
+    );
+    if (link) {
+      link.parentElement.classList.remove("unactive");
+      link.parentElement.classList.add("active");
+      document.querySelectorAll(".nlds-nav-link").forEach((nldsLink) => {
+        if (link.href != nldsLink.href) {
+          link.parentElement.classList.remove("unactive");
+          link.parentElement.classList.add("active");
+        }
+      });
+    }
+  });
+</script>
 <header class="nlds-header">
   <nav class="nlds-navbar">
     <ul>
       <li>
-        <a class="nlds-link" href="/">
-          <b class="nlds-navbar__title"> Hebik.nldesignsystem </b>
-        </a>
+        <div class="nlds-navbar-wrapper__title">
+          <a class="nlds-link" href="../verkenner">
+            <b class="nlds-navbar__title"> Hebik.nldesignsystem </b>
+          </a>
+        </div>
       </li>
-      <li class="active">
-        <a class="nlds-nav-link" href="/verkenner">Verkenner</a>
-      </li>
-      <li class="unactive">
-        <a class="nlds-nav-link" href="/component-ehbo">Component-EHBO</a>
+      <li>
+        <ul>
+          <li class="unactive">
+            <a class="nlds-nav-link" href="/verkenner">Verkenner</a>
+          </li>
+          <li class="unactive">
+            <a class="nlds-nav-link" href="/component-ehbo">Component-EHBO</a>
+          </li>
+        </ul>
       </li>
     </ul>
   </nav>

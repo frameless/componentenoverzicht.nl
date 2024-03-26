@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,525;1,525&display=swap");
+
 .nlds-header {
   inline-size: 100%;
   block-size: 80px;
@@ -16,52 +18,93 @@
   list-style-type: none;
 }
 
-.nlds-navbar ul li.active {
+.nlds-navbar > ul {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+li.active {
   background-color: #f8f8f8;
   border-style: solid;
-  border-width: 5px 5px 0px 5px;
+  border-width: 4px 4px 0px 4px;
+  line-height: 68px;
   box-sizing: border-box;
-  border-color: #ebebeb;
+  border-color: #e3e3e3;
   text-align: center;
   align-items: center;
   margin-block: auto;
   inline-size: 50%;
   block-size: 100%;
-  border-inline-start: 0;
 }
 
-.nlds-navbar ul li.unactive {
+li.unactive {
   box-sizing: border-box;
-  border-color: #ebebeb;
+  border-color: #e6e6e6;
+  line-height: 68px;
   text-align: center;
   align-items: center;
   margin-block: auto;
   inline-size: 50%;
   block-size: 100%;
-  border-block-end: 5px solid #ebebeb;
+  border-block-end: 4px solid #e6e6e6;
 }
 
-.nlds-navbar ul li a {
+li.unactive .nlds-nav-link {
+  margin-block-start: 5px;
+}
+
+.nlds-link {
+  text-decoration: none;
+}
+
+.nlds-nav-link {
   display: block;
-  line-height: 70px;
   block-size: 100%;
   inline-size: 100%;
   text-decoration: none;
-  font-family: "Open Sans";
-  font-size: 1.35rem;
-  font-weight: 600;
+  font-size: 1.45rem;
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 525;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
   color: #a2a2a2;
+}
+
+.nlds-navbar-wrapper__title {
+  display: inline-block;
+  vertical-align: middle;
+  block-size: 28.5px;
+  background-color: rgb(13, 31, 42);
+  padding-inline: 23.25px;
+  padding-block: 23.25px;
+  padding-inline-end: 362px;
+  border-block-end: 5px solid #e6e6e6;
 }
 
 .nlds-navbar__title {
   display: block;
   font-family: "Fira Sans";
   font-size: 28px;
-  padding-inline: 23.25px;
-  padding-block: 2.5px;
-  padding-inline-end: 362px;
   color: #fff;
-  background-color: rgb(13, 31, 42);
-  border-block-end: 5px solid #ebebeb;
-  border-inline-end: 5px solid #ebebeb;
+}
+
+@media (max-width: 1160px) {
+  .nlds-navbar ul {
+    flex-direction: column;
+  }
+
+  .nlds-navbar ul li {
+    inline-size: 100%;
+  }
+
+  .nlds-navbar ul li ul {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .nlds-navbar-wrapper__title {
+    inline-size: 100%;
+    border-block-end: 0;
+  }
 }
