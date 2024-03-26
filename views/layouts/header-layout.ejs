@@ -1,110 +1,17 @@
-<style>
-  :root {
-    --navbar-title-block-size: 35.6060606061%;
-  }
-</style>
-<header
-  class="nlds-header"
-  style="
-    display: flex;
-    justify-content: space-between;
-    inline-size: 100%;
-    block-size: 80px;
-  "
->
-  <a class="nlds-link">
-    <b
-      class="nlds-navbar__title"
-      style="
-        position: absolute;
-        font-family: 'Fira Sans';
-        font-size: 28px;
-        padding-inline: 23.25px;
-        padding-block: 23.25px;
-        padding-inline-end: calc(
-          (100% - var(--navbar-title-block-size)) - 831px
-        );
-        color: #fff;
-        background-color: rgb(13, 31, 42);
-        border-bottom: 5px solid #ebebeb;
-      "
-    >
-      Hebik.nldesignsystem
-    </b>
-  </a>
-  <nav
-    style="
-      position: absolute;
-      left: calc(var(--navbar-title-block-size) + 20px);
-      block-size: 80px;
-      inline-size: calc(100% - var(--navbar-title-block-size));
-    "
-  >
-    <ul
-      style="
-        display: flex;
-        margin: 0;
-        padding: 0;
-        block-size: 100%;
-        list-style-type: none;
-      "
-    >
-      <li
-        style="
-          background-color: #f8f8f8;
-          border-style: solid;
-          border-width: 5px 5px 0px 5px;
-          box-sizing: border-box;
-          border-color: #ebebeb;
-          text-align: center;
-          align-items: center;
-          margin-block: auto;
-          inline-size: 50%;
-          block-size: 100%;
-        "
-      >
-        <a
-          style="
-            display: block;
-            line-height: 70px;
-            block-size: 100%;
-            inline-size: 100%;
-            text-decoration: none;
-            font-family: 'Open Sans';
-            font-size: 1.35rem;
-            font-weight: 600;
-            color: #a2a2a2;
-          "
-          href="/verkenner"
-          >Verkenner</a
-        >
+<script type="text/javascript"></script>
+<header class="nlds-header">
+  <nav class="nlds-navbar">
+    <ul>
+      <li>
+        <a class="nlds-link" href="/">
+          <b class="nlds-navbar__title"> Hebik.nldesignsystem </b>
+        </a>
       </li>
-      <li
-        style="
-          box-sizing: border-box;
-          border-color: #ebebeb;
-          text-align: center;
-          align-items: center;
-          margin-block: auto;
-          inline-size: 50%;
-          block-size: 100%;
-        "
-      >
-        <a
-          style="
-            display: block;
-            line-height: 70px;
-            block-size: 100%;
-            inline-size: 100%;
-            text-decoration: none;
-            font-family: 'Open Sans';
-            font-size: 1.35rem;
-            font-weight: 600;
-            color: #a2a2a2;
-          "
-          href="/component-ehbo"
-          >Component-EHBO</a
-        >
+      <li class="active">
+        <a class="nlds-nav-link" href="/verkenner">Verkenner</a>
+      </li>
+      <li class="unactive">
+        <a class="nlds-nav-link" href="/component-ehbo">Component-EHBO</a>
       </li>
     </ul>
   </nav>
