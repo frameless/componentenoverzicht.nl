@@ -27,7 +27,7 @@ li.active {
   background-color: #f8f8f8;
   border-style: solid;
   border-width: 4px 4px 0px 4px;
-  line-height: 68px;
+  line-height: 70px;
   box-sizing: border-box;
   border-color: #e3e3e3;
   text-align: center;
@@ -94,14 +94,17 @@ li.unactive .nlds-nav-link {
   .nlds-navbar > ul > li > ul {
     flex-direction: row;
     inline-size: 100%;
+    block-size: 65px;
   }
 
-  .nlds-navbar > ul > li > ul > li {
+  .nlds-navbar .active {
     inline-size: 100%;
+    line-height: 60px;
   }
 
-  .nlds-navbar > ul > li {
+  .nlds-navbar .unactive {
     inline-size: 100%;
+    line-height: 58px;
   }
 
   .nlds-navbar > ul {
