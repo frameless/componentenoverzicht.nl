@@ -20,7 +20,7 @@
 
 .nlds-navbar > ul {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: auto 1fr;
 }
 
 li.active {
@@ -74,6 +74,7 @@ li.unactive .nlds-nav-link {
 .nlds-navbar-wrapper__title {
   display: inline-block;
   vertical-align: middle;
+  grid-column: 1;
   block-size: 28.5px;
   background-color: rgb(13, 31, 42);
   padding-inline: 23.25px;
@@ -90,21 +91,24 @@ li.unactive .nlds-nav-link {
 }
 
 @media (max-width: 1160px) {
-  .nlds-navbar ul {
-    flex-direction: column;
-  }
-
-  .nlds-navbar ul li {
+  .nlds-navbar > ul > li > ul {
+    flex-direction: row;
     inline-size: 100%;
   }
 
-  .nlds-navbar ul li ul {
-    display: flex;
-    justify-content: space-evenly;
+  .nlds-navbar > ul > li > ul > li {
+    inline-size: 100%;
+  }
+
+  .nlds-navbar > ul > li {
+    inline-size: 100%;
+  }
+
+  .nlds-navbar > ul {
+    grid-template-columns: 100%;
   }
 
   .nlds-navbar-wrapper__title {
-    inline-size: 100%;
     border-block-end: 0;
   }
 }
