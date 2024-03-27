@@ -5,12 +5,12 @@
       '.nlds-nav-link[href="/' + pageSlug + '"]'
     );
     if (link) {
-      link.parentElement.classList.remove("unactive");
-      link.parentElement.classList.add("active");
+      link.parentElement.parentElement.classList.remove("unactive");
+      link.parentElement.parentElement.classList.add("active");
       document.querySelectorAll(".nlds-nav-link").forEach((nldsLink) => {
         if (link.href != nldsLink.href) {
-          link.parentElement.classList.remove("unactive");
-          link.parentElement.classList.add("active");
+          link.parentElement.parentElement.classList.remove("unactive");
+          link.parentElement.parentElement.classList.add("active");
         }
       });
     }
@@ -23,14 +23,43 @@
         <a class="nlds-link" href="../verkenner">
           <b class="nlds-navbar__title"> Hebik.nldesignsystem </b>
         </a>
+        <a class="nlds-backlink" href="https://nldesignsystem.nl/">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="tabler-icon tabler-icon-arrow-bar-to-left"
+          >
+            <path d="M10 12l10 0"></path>
+            <path d="M10 12l4 4"></path>
+            <path d="M10 12l4 -4"></path>
+            <path d="M4 4l0 16"></path>
+          </svg>
+          <p
+            class="nlds-backlink__title"
+            aria-label="Terug naar nldesignsystem.nl"
+          >
+            nldesignsystem.nl
+          </p>
+        </a>
       </li>
       <li>
         <ul>
           <li class="unactive">
-            <a class="nlds-nav-link" href="/verkenner">Verkenner</a>
+            <div class="nlds-nav-link-wrapper">
+              <a class="nlds-nav-link" href="/verkenner">Verkenner</a>
+            </div>
           </li>
           <li class="unactive">
-            <a class="nlds-nav-link" href="/component-ehbo">Component-EHBO</a>
+            <div class="nlds-nav-link-wrapper">
+              <a class="nlds-nav-link" href="/component-ehbo">Component-EHBO</a>
+            </div>
           </li>
         </ul>
       </li>
