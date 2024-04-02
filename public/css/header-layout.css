@@ -117,6 +117,10 @@ li.unactive .nlds-nav-link {
 }
 
 @media (max-width: 1160px) {
+  .nlds-header {
+    block-size: 141px;
+  }
+
   .nlds-navbar > ul > li > ul {
     flex-direction: row;
     inline-size: 100%;
@@ -163,7 +167,7 @@ li.unactive .nlds-nav-link {
 
 @media (max-width: 510px) {
   .nlds-navbar-wrapper__title {
-    min-inline-size: 320px;
+    min-inline-size: 310px;
   }
 
   .nlds-nav-link {

@@ -4,12 +4,121 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="<%= description %>" />
+    <link rel="stylesheet" href="../../css/verkenner.css" />
     <link rel="stylesheet" href="../../css/header-layout.css" />
     <link rel="apple-touch-icon" href="../../images/apple-touch-icon.png" />
     <title>Verkenner - Hebik.nldesignsystem</title>
   </head>
   <body style="margin: 0; padding: 0; border: 0">
     <%- include('../layouts/header-layout.ejs') %>
-    <main></main>
+    <main>
+      <div class="nlds-toolbar">
+        <div class="nlds-toolbar__column">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon icon-tabler icon-tabler-brand-github"
+            width="44"
+            height="44"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="#A2A2A2"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path
+              d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
+            />
+          </svg>
+          <div class="nlds-inputfield-wrapper">
+            <label
+              class="nlds-label"
+              for="repository-address"
+              aria-label="Opslagadres van website-code"
+              >Opslagadres van website-code:</label
+            >
+            <input
+              class="nlds-inputfield"
+              id="repository-address"
+              name="repo-address"
+              value=""
+            />
+          </div>
+        </div>
+        <div class="nlds-toolbar__column">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon icon-tabler icon-tabler-sitemap"
+            width="44"
+            height="44"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="#A2A2A2"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path
+              d="M3 15m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"
+            />
+            <path
+              d="M15 15m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"
+            />
+            <path
+              d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"
+            />
+            <path d="M6 15v-1a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v1" />
+            <path d="M12 9l0 3" />
+          </svg>
+          <div class="nlds-inputfield-wrapper">
+            <label
+              class="nlds-label"
+              for="page-slug"
+              aria-label="Paginaslug (Optioneel)"
+              >Paginaslug (Optioneel):</label
+            >
+            <input
+              class="nlds-inputfield"
+              id="page-slug"
+              name="page-slug"
+              value=""
+            />
+          </div>
+        </div>
+        <div class="nlds-toolbar__column">
+          <label class="nlds-label" for="libraries" aria-label="Bibliotheken"
+            >Bibliotheken:</label
+          >
+          <div class="nlds-label-wrapper">
+            <label
+              class="nlds-label-library"
+              id="css-component-lib"
+              for="library"
+              aria-label="Bibliotheek"
+            >
+              v3.0.1-alpha.12
+            </label>
+            <label
+              class="nlds-label-library"
+              id="react-component-lib"
+              for="library"
+              aria-label="Bibliotheek"
+            >
+              v3.0.1-alpha.14
+            </label>
+            <label
+              class="nlds-label-library"
+              id="web-component-lib"
+              for="library"
+              aria-label="Bibliotheek"
+            >
+              v1.0.2
+            </label>
+          </div>
+        </div>
+      </div>
+    </main>
   </body>
 </html>
